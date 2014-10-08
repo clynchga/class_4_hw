@@ -11,6 +11,7 @@ username = gets.chomp.capitalize
 if username == "Jack" || username == "Jill"
 	puts "Hello #{username}!"
 else 
+	puts "No greeting for you"
 end 
 
 # Write a program that asks the user for a number n and prints the sum of the numbers 1 to n
@@ -50,6 +51,7 @@ elsif compute_flag == "product"
 	end
 	puts "The product is #{product}"
 else
+	"I didn't recognize that input"
 end
 
 # Write a guessing game where the user has to guess a secret number. After every guess the 
@@ -81,13 +83,9 @@ puts "\nGame over. Number of guesses: #{num_guesses}\n\n"
 
 def sparkle_magic(strings)
 
-maxlength = 0 
-strings.each do |string|
-	if string.length > maxlength
-		maxlength = string.length
-	else 
-	end
-end
+max_length = strings.max_by(&:length).length
+# could also be written:
+# max_length = strings.max_by({|s| s.length}).length
 
 puts "*" * (maxlength + 4)
 strings.each{|string| puts "* " + string + " "*(maxlength - string.length) + " *"}
@@ -100,7 +98,7 @@ end
 
 n = 75
 x = 1
-while x <= n
+while x <= n   # or use (1..75).each do |i|
 	if x % 3 == 0 && x % 5 == 0 
 		puts "BewdRocks"
 		x += 1
@@ -132,5 +130,5 @@ end
 
 temperature_variance.delete_if{|entry| entry[:day] == 0} 
 
-min_temp_var_day = temperature_variance.sort_by{|el| el[:variation]}[0][:day]
+min_temp_var_day = temperature_variance.min_by{|el| el[:variation]}[:day]
 puts "The date with the minimum temperature spread was June #{min_temp_var_day}"
